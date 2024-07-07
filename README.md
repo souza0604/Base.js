@@ -28,51 +28,21 @@ npm install aoi.js
 ## Configurações
 
 ```javascript
-const aoijs = require("aoi.js")
+const {
+	AoiClient
+} = require("aoi.js");
+const config = require("./config.js")
+const fs = require('fs');
 
-const bot = new aoijs.AoiClient({
-  token: "DISCORD BOT TOKEN",
-  prefix: "DISCORD BOT PREFIX",
-  intents: ["GUILDS", "GUILD_MESSAGES"]
-})
-//Events
-bot.onMessage()
+const client = new AoiClient(config.Bot);
 
-//Command Example (ping)
-bot.command({
-  name: "ping",
-  code: `
-  Pong! $pingms 🏓
-  `
-});
+require("./src/types/events/variavel.js")(client);
+require("./src/types/events/status.js")(client);
+require("./src/types/functions/antiCrash.js")(client);
 
-//Ready Event
-bot.readyCommand({
-  channel: "",
-  code: `
-  $log[Ready on $userTag[$clientID]]
-  `
-});
-
-//Slash Command Example (ping)
-//$createApplicationCommand[$guildID;ping;Pong!;true;slash]
-bot.interactionCommand({
-  name: "ping",
-  prototype: 'slash',
-  code: `
-  $interactionReply[Pong! $pingms 🏓]
-  `
-});
+// Handler
+client.loadCommands("./src/comandos/", true);
+for (const file of fs.readdirSync('./src/types/functions').filter(file => file.endsWith('.js'))) {
+	require(`./src/types/functions/${file}`)(client);
+}
 ```
-### Would you want to contribute? 
-
-We would like to build our documentary along with you to make it betters to everyone!
-
-Before contributing please read our [Contribution Guidelines](https://github.com/aoijs/documentation/blob/v5/.github/docs/contributing.md).
-
-## Links
-- [Website](https://aoi.js.org)
-- [NPM](https://www.npmjs.com/package/aoi.js)
-- [Github](https://github.com/AkaruiDevelopment/aoi.js)
-- [Discord Server](https://discord.gg/HMUfMXDQsV)
-- [Documentation](https://aoi.js.org/docs/)

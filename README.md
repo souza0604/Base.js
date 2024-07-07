@@ -17,15 +17,15 @@ _Aoi.JS é um pacote com funções simplificadas e prontas para uso para desenvo
 _É rápido e flexível usar funções._ 
 _Código aberto para a comunidade ❤️_
 
-## Installation
+## Instalação
 
-**Node.JS 16.6.0 or newer is required.**  
+**Node.JS 16.6.0 ou o novo.**  
 
 ```sh-session
 npm install aoi.js
 ```
 
-## Setting up
+## Configurações
 
 ```javascript
 const aoijs = require("aoi.js")
